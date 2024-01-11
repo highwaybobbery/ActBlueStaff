@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     @user = User.find_or_initialize_by(user_params)
 
     if @user.persisted?
-      login_user
+      login_user(@user)
 
       if current_user.has_voted?
         redirect_to votes_url, notice: "You have already voted. Thanks for your participation!"
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       end
     else
       if @user.save
-        login_user
+        login_user(@user)
         redirect_to new_vote_url, notice: "New voter registered."
       else
         render :new, status: :unprocessable_entity
