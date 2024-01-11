@@ -1,0 +1,12 @@
+<h1>Cast your vote today!</h1>
+<% if @candidates.any? %>
+  <%= render "votes/existing_candidate_form", vote: @vote, write_in_candidate: @write_in_candidate  %>
+<% else %>
+  <p>
+    No candidates advanced yet, please write in your candidate below
+  </p>
+<% end %>
+<hr/>
+<p>Or, add a new candidate:</p>
+<%= render "votes/write_in_candidate_form", vote: @vote, write_in_candidate: @write_in_candidate  %>
+

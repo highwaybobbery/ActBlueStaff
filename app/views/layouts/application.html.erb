@@ -11,6 +11,20 @@
   </head>
 
   <body>
+  <div style="clear:both; height: 20px;">
+    <div style="float:left"><a href="/">VOTE.WEBSITE</a></div>
+    <div style="float:right; margin-left: 10px;">
+      <% if current_user.present? %>
+        <%= button_to 'Sign Out', '/sessions/destroy', method: :delete %>
+      <% elsif ! current_page?(controller: 'sessions', action: 'new') %>
+        <%= button_to 'Sign In to Vote', '/sessions/new', method: :get %>
+      <% end %>
+    </div>
+    <div style="float:right">
+      <%= current_user&.email %>
+    </div>
+  </div>
+  <hr/>
     <%= yield %>
   </body>
 </html>

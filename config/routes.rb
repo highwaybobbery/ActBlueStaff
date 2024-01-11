@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :votes, only: [:new, :create, :index]
+  resources :candidates, only: :create
+  resources :sessions, only: [:new, :create, :destroy]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root "index#index"
 end

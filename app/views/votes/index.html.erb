@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Votes</h1>
+
+<div id="votes">
+  <%
+    # TODO: This is a temporary implementation to help validate that votes are being recorded correctly.
+    # Ensure this is updated to provide only a summary of votes by candidate before launch!
+  %>
+  <table id="votes_raw">
+    <tr>
+      <th>Candidate</th>
+      <th>Voter</th>
+    </tr>
+    <% @votes.each do |vote| %>
+      <tr>
+        <td><%= vote.candidate.name %></td>
+        <td><%= vote.user.email %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
