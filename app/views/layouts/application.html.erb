@@ -12,7 +12,12 @@
 
   <body>
   <div style="clear:both; height: 20px;">
-    <div style="float:left"><a href="/">VOTE.WEBSITE</a></div>
+    <div style="float:left">
+      <a href="/">VOTE.WEBSITE</a>
+      <% if ! current_page?(controller: 'votes', action: 'index') %>
+        | <a href="/votes">Election Results</a>
+      <% end %>
+    </div>
     <div style="float:right; margin-left: 10px;">
       <% if current_user.present? %>
         <%= button_to 'Sign Out', '/sessions/destroy', method: :delete %>

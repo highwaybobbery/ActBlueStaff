@@ -15,7 +15,7 @@ class VotesController < ApplicationController
     end
 
     if current_user.has_voted?
-      redirect_to action: :index, notice: "You have already voted. thanks for your participation!"
+      redirect_to action: :index, notice: "You have already voted. Thanks for your participation!"
     end
 
     @candidates = Candidate.all
