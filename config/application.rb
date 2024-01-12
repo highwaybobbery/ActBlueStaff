@@ -33,5 +33,7 @@ module ActBlueStaffChallenge
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.cache_store = :memory_store, { size: 64.megabytes }
   end
 end

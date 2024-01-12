@@ -3,7 +3,7 @@ class VotesController < ApplicationController
 
   # GET /votes or /votes.json
   def index
-    @votes = Vote.joins(:candidate).group('candidates.name').order('count_all desc').count
+    @votes = Vote.cached_votes_by_candidate
   end
 
   # GET /votes/new
