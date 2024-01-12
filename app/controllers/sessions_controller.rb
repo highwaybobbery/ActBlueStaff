@@ -7,9 +7,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_or_initialize_by(user_params)
+    # This ensures that we find only by email address, but still allow the setting of zip code.
+    @user = User.find_or_initialize_by(user_params.slice('email'))
+
+    @user.assign_attributes(user_params)
 
     if @user.persisted?
+      # login is guaranteed to save the user, so a separate save to capture a possible new zipcode is not needed.
       login_user(@user)
 
       if current_user_has_voted?
@@ -37,6 +41,6 @@ class SessionsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :zipcode)
   end
 end

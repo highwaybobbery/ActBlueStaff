@@ -10,25 +10,29 @@
   </head>
 
   <body>
-  <div style="clear:both; height: 20px;">
-    <div style="float:left">
-      <a href="/">VOTE.WEBSITE</a>
-      <% if ! current_page?(controller: 'votes', action: 'index') %>
-        | <a href="/votes">Election Results</a>
-      <% end %>
-    </div>
-    <div style="float:right; margin-left: 10px;">
+  <div style="width: 800px; margin: auto">
+    <div style="clear:both; height: 20px;">
+      <div style="float:left">
+        <a href="/">VOTE.WEBSITE</a>
+        <% if ! current_page?(controller: 'votes', action: 'index') %>
+          | <a href="/votes">Election Results</a>
+        <% end %>
+      </div>
+      <div style="float:right; margin-left: 10px;">
+        <% if current_user.present? %>
+          <%= button_to 'Sign Out', '/sessions/destroy', method: :delete, id: 'signout_button' %>
+        <% elsif ! current_page?(controller: 'sessions', action: 'new') %>
+          <%= button_to 'Sign In to Vote', '/sessions/new', method: :get %>
+        <% end %>
+      </div>
       <% if current_user.present? %>
-        <%= button_to 'Sign Out', '/sessions/destroy', method: :delete, id: 'signout_button' %>
-      <% elsif ! current_page?(controller: 'sessions', action: 'new') %>
-        <%= button_to 'Sign In to Vote', '/sessions/new', method: :get %>
+        <div style="float:right">
+          signed in as: <%= current_user&.email %>
+        </div>
       <% end %>
     </div>
-    <div style="float:right">
-      <%= current_user&.email %>
-    </div>
+    <hr/>
+      <%= yield %>
   </div>
-  <hr/>
-    <%= yield %>
   </body>
 </html>

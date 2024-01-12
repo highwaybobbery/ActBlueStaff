@@ -10,7 +10,7 @@
   <table id="votes_raw">
     <tr>
       <th>Candidate</th>
-      <th>Voter</th>
+      <th>Votes</th>
     </tr>
     <% @votes.each do |candidate_name, vote_count| %>
       <tr>
@@ -20,3 +20,9 @@
     <% end %>
   </table>
 </div>
+
+<% if caching_enabled? %>
+  <p> <small>Note: results are updated every 10 votes</small> </p>
+<% else %>
+  <p> <small>Note: cache is disabled, results are shown in real time</small> </p>
+<% end %>

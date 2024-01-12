@@ -12,8 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
+    <%= form.label :email, "Email Address (required)", style: "display: block" %>
     <%= form.text_field :email %>
+  </div>
+  <br/>
+  <div>
+    <%= form.label :zipcode, "Zipcode (optional)", style: "display: block" %>
+    <%= form.text_field :zipcode, maxlength: 5 %>
   </div>
   <br/>
 
