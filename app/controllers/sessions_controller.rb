@@ -30,8 +30,8 @@ class SessionsController < ApplicationController
   def destroy
     if current_user.present?
       logout_user
-      redirect_to root_url
     end
+    redirect_to root_url
   end
 
   private

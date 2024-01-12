@@ -19,7 +19,7 @@
     </div>
     <div style="float:right; margin-left: 10px;">
       <% if current_user.present? %>
-        <%= button_to 'Sign Out', '/sessions/destroy', method: :delete %>
+        <%= button_to 'Sign Out', '/sessions/destroy', method: :delete, id: 'signout_button' %>
       <% elsif ! current_page?(controller: 'sessions', action: 'new') %>
         <%= button_to 'Sign In to Vote', '/sessions/new', method: :get %>
       <% end %>

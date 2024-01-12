@@ -13,8 +13,13 @@ class CandidatesController < ApplicationController
     @write_in_candidate = Candidate.new(candidate_params)
 
     if @write_in_candidate.save
-      Vote.create!(candidate: @write_in_candidate, user: current_user)
-      redirect_to votes_url, notice: "Your vote has been successfully recorded. Thanks for your participation!"
+      @vote = Vote.new(candidate: @write_in_candidate, user: current_user)
+      if @vote.save
+        redirect_to vote_url(@vote), notice: "Your vote has been successfully recorded."
+      else
+        @candidates = Candidate.all
+        render 'votes/new', status: :unprocessable_entity
+      end
     else
       @candidates = Candidate.all
       @vote = Vote.new
@@ -24,8 +29,7 @@ class CandidatesController < ApplicationController
 
   private
 
-    # Only allow a list of trusted parameters through.
-    def candidate_params
-      params.require(:candidate).permit(:name)
-    end
+  def candidate_params
+    params.require(:candidate).permit(:name)
+  end
 end

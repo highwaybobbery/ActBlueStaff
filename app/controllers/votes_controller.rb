@@ -1,6 +1,4 @@
 class VotesController < ApplicationController
-  before_action :set_vote, only: %i[ show edit update destroy ]
-
   def index
     @votes = Vote.cached_votes_by_candidate
   end
@@ -21,18 +19,24 @@ class VotesController < ApplicationController
 
 
   def create
-    @vote = Vote.new(vote_params.merge(user_id: current_user.id))
+    @vote = Vote.new(vote_params.merge(user: current_user))
     if @vote.save
-      redirect_to votes_url, notice: "Your vote has been successfully recorded. Thanks for your participation!"
+      redirect_to vote_url(@vote), notice: "Your vote has been successfully recorded."
     else
+      @candidates = Candidate.all
+      @write_in_candidate = Candidate.new
       render :new, status: :unprocessable_entity
     end
   end
 
+  def show
+    @vote = Vote.find(params[:id])
+    render :show
+  end
+
   private
 
-    # Only allow a list of trusted parameters through.
-    def vote_params
-      params.require(:vote).permit(:candidate_id)
-    end
+  def vote_params
+    params.require(:vote).permit(:candidate_id)
+  end
 end

@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Thank You for your Vote!</h1>
+
+<p>Your vote for <%= @vote.candidate.name %> has been recorded. Thank you for participating!</p>
+<p>You will automatically be logged_out in <span id=logout_timer>5 seconds</span></p>
+<%= button_to 'Sign Out Now', '/sessions/destroy', method: :delete %>
+
+<script language="JavaScript">
+  setTimeout(function() {
+   document.getElementById('signout_button').click()
+  }, 5000);
+</script>
