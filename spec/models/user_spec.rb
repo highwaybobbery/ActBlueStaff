@@ -20,6 +20,11 @@ describe User do
       expect(user).to be_invalid
       expect(user.errors.messages).to eq({ email: ['is invalid']})
     end
+
+    it 'downcases before saving' do
+      user = create(:user, email: 'Alex@gMAIL.coM')
+      expect(user.email).to eq('alex@gmail.com')
+    end
   end
 
   describe 'zipcode' do
