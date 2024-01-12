@@ -12,10 +12,10 @@
       <th>Candidate</th>
       <th>Voter</th>
     </tr>
-    <% @votes.each do |vote| %>
+    <% @votes.each do |candidate_name, vote_count| %>
       <tr>
-        <td><%= vote.candidate.name %></td>
-        <td><%= vote.user.email %></td>
+        <td><%= candidate_name %></td>
+        <td><%= vote_count %></td>
       </tr>
     <% end %>
   </table>

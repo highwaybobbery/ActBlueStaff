@@ -3,9 +3,7 @@ class VotesController < ApplicationController
 
   # GET /votes or /votes.json
   def index
-    # TODO: This is a temporary implementation to help validate that votes are being recorded correctly.
-    # Ensure this is updated to provide only a summary of votes by candidate before launch!
-    @votes = Vote.includes(:user, :candidate).all
+    @votes = Vote.joins(:candidate).group('candidates.name').order('count_all desc').count
   end
 
   # GET /votes/new
@@ -28,7 +26,7 @@ class VotesController < ApplicationController
   def create
     @vote = Vote.new(vote_params.merge(user_id: current_user.id))
     if @vote.save
-      redirect_to votes_url(@vote), notice: "Your vote has been successfully recorded. Thanks for your participation!"
+      redirect_to votes_url, notice: "Your vote has been successfully recorded. Thanks for your participation!"
     else
       render :new, status: :unprocessable_entity
     end
