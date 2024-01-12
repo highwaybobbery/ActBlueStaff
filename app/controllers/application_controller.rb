@@ -1,14 +1,18 @@
 class ApplicationController < ActionController::Base
-
-  def session_manager
-    @session_manager ||= SessionManager.new(session)
-  end
-
   def current_user
     session_manager.current_user
   end
+  helper_method :current_user
 
-  helper_method(:current_user)
+  def session_expires_at
+    session_manager.session_expires_at
+  end
+  helper_method :session_expires_at
+
+  def session_manager
+    # the session being passed in here is the browser session, from the user cookie.
+    @session_manager ||= SessionManager.new(session)
+  end
 
   def login_user(user)
     session_manager.login_user(user)

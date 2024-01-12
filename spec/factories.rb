@@ -2,11 +2,11 @@
 
 FactoryBot.define do
   factory(:user) do
-    email { Faker::Internet.email }
+    email { Faker::Internet.unique.email }
   end
 
   factory(:candidate) do
-    name { Faker::Name }
+    name { Faker::Name.unique.name }
   end
 
   factory(:vote) do

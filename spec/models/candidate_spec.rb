@@ -16,4 +16,16 @@ describe Candidate do
     end
   end
 
+  describe 'maximum candidates validation' do
+    it 'allows up to 10 candidates' do
+      10.times do
+        expect(create(:candidate)).to be_valid
+      end
+
+      next_candidate = build(:candidate)
+      expect{ next_candidate.save }.not_to change { Candidate.count }.from(10)
+
+      expect(next_candidate.errors.messages).to eq({ base: ['exceeded maximum entries']})
+    end
+  end
 end

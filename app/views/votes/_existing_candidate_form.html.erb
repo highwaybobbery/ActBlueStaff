@@ -12,8 +12,14 @@
   <% end %>
 
   <div>
-    <%= form.collection_radio_buttons :candidate_id, @candidates, :id, :name %>
+    <%= form.collection_radio_buttons :candidate_id, @candidates, :id, :name do |b| %>
+      <div>
+        <%= b.radio_button %>
+        <%= b.label %>
+      </div>
+    <% end %>
   </div>
+
   <br/>
   <div>
     <%= form.submit "Vote" %>

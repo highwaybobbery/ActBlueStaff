@@ -90,4 +90,18 @@ describe SessionManager do
       }.from(user.id).to(nil)
     end
   end
+
+  describe '#session_expires_at' do
+    it 'is nil when not logged in' do
+      expect(subject.session_expires_at).to be_nil
+    end
+
+    it 'is 5 minutes after current_user.logged_in_at when logged in' do
+      new_time = Time.local(2023, 9, 22, 12, 0, 0)
+      Timecop.freeze(new_time) do
+        subject.login_user(user)
+        expect(subject.session_expires_at).to eq new_time + 5.minutes
+      end
+    end
+  end
 end

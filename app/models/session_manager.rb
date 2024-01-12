@@ -24,6 +24,11 @@ class SessionManager
     self.current_user = nil
   end
 
+  def session_expires_at
+    return unless current_user
+    current_user.logged_in_at + SESSION_LENGTH_IN_SECONDS.seconds
+  end
+
   private
 
   attr_writer :current_user
