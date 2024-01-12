@@ -77,6 +77,8 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.0)
+    email_validator (2.2.4)
+      activemodel
     erubi (1.12.0)
     factory_bot (6.4.5)
       activesupport (>= 5.0.0)
@@ -221,6 +223,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  email_validator
   factory_bot_rails
   faker
   pg (~> 1.1)

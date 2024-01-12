@@ -14,7 +14,7 @@ class VotesController < ApplicationController
       redirect_to new_session_url, notice: "Please Sign In to Vote!"
     end
 
-    if current_user.has_voted?
+    if current_user_has_voted?
       redirect_to action: :index, notice: "You have already voted. Thanks for your participation!"
     end
 

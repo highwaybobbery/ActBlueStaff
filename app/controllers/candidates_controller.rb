@@ -1,22 +1,24 @@
 class CandidatesController < ApplicationController
   def create
     if current_user.blank?
-      redirect_to new_user_url
+      redirect_to new_session_url
+      return
     end
 
-    if current_user.has_voted?
+    if current_user_has_voted?
       redirect_to votes_url, notice: "You have already voted. Thanks for your participation!"
+      return
     end
 
-    @candidate = Candidate.new(candidate_params)
+    @write_in_candidate = Candidate.new(candidate_params)
 
-    respond_to do |format|
-      if @candidate.save
-        Vote.create(candidate: @candidate, user: current_user)
-        format.html { redirect_to votes_url, notice: "Your vote has been successfully recorded. Thanks for your participation!" }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @write_in_candidate.save
+      Vote.create!(candidate: @write_in_candidate, user: current_user)
+      redirect_to votes_url, notice: "Your vote has been successfully recorded. Thanks for your participation!"
+    else
+      @candidates = Candidate.all
+      @vote = Vote.new
+      render 'votes/new', status: :unprocessable_entity
     end
   end
 

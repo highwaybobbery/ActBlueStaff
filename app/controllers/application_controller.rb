@@ -17,5 +17,8 @@ class ApplicationController < ActionController::Base
   def logout_user
     session_manager.logout_user
   end
-  # delegate :current_user, :login_user, :logout_user, to: session_manager
+
+  def current_user_has_voted?
+    current_user&.has_voted?
+  end
 end

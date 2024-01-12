@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     if @user.persisted?
       login_user(@user)
 
-      if current_user.has_voted?
+      if current_user_has_voted?
         redirect_to votes_url, notice: "You have already voted. Thanks for your participation!"
       else
         redirect_to new_vote_url, notice: "Welcome back! Please vote!"
