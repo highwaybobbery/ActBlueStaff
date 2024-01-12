@@ -1,12 +1,10 @@
 class VotesController < ApplicationController
   before_action :set_vote, only: %i[ show edit update destroy ]
 
-  # GET /votes or /votes.json
   def index
     @votes = Vote.cached_votes_by_candidate
   end
 
-  # GET /votes/new
   def new
     if current_user.blank?
       redirect_to new_session_url, notice: "Please Sign In to Vote!"
@@ -22,7 +20,6 @@ class VotesController < ApplicationController
   end
 
 
-  # POST /votes or /votes.json
   def create
     @vote = Vote.new(vote_params.merge(user_id: current_user.id))
     if @vote.save

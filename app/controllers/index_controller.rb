@@ -1,6 +1,5 @@
 class IndexController < ApplicationController
 
-  # GET /users or /users.json
   def index
     # This logic would ideally be moved to the front end as a single page application
     if current_user
