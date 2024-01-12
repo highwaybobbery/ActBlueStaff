@@ -1,5 +1,12 @@
 # ActBlue Staff Engineer Coding Challenge by Alex Berry
 
+## Project Resources
+[requirements](docs/%5BStaff%5D%20Voting%20Machine%20-%20Take-Home%20Technical%20Exercise%20_.docx)
+
+[results mockup](docs/Results.png)
+
+[vote mockup](docs/Vote.png)
+
 ## Tech Overview
 This is a rails 7 app, built using Ruby 3.3.0, backed by a Postgres databse.
 In the interest of simplicity this is a monolithic app with standard rails MVC.
